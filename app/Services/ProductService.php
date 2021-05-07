@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -23,6 +24,42 @@ class ProductService
         }
 
         return $collection;
+    }
+
+    public function sort($collection)
+    {
+        if (request()->has('sort') && in_array(request()->sort, ['price', 'most_selling', 'votes'])) {
+            if(request()->sort === 'price' ) {
+
+                $collection = $collection->sortBy(function($item)
+                {
+                    return $item->price;
+                });
+
+                if(request()->has('type') && request()->type === 'desc') {
+                    $collection = $collection->reverse();
+                }
+            } else if(request()->sort === 'most_selling') {
+                $collection = $collection->sortBy(function($item)
+                {
+                    return $item->sold_times;
+                });
+
+                $collection = $collection->reverse();
+
+            } else if(request()->sort === 'votes') {
+
+                $collection = $collection->sortBy(function($item)
+                {
+                    return count($item->votes);
+                });
+
+                $collection = $collection->reverse();
+            }
+
+            return $collection;
+        }
+
     }
 
     public function all()
@@ -55,7 +92,14 @@ class ProductService
             $collection->add($product);
         }
 
-        return $collection;
+        return app(Pipeline::class)
+            ->send($this->sort($collection))
+            ->through([
+                \App\QueryFilters\Name::class,
+                \App\QueryFilters\Price::class,
+                \App\QueryFilters\VendorName::class,
+            ])
+            ->thenReturn();
     }
 
     protected function fetch($uri = null)
