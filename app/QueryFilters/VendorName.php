@@ -2,12 +2,12 @@
 
 namespace App\QueryFilters;
 
-class Name extends Filter
+class VendorName extends Filter
 {
     protected function applyFilters($builder)
     {
         return $builder->filter(function ($item) {
-            return stripos($item->name, request($this->filterName())) !== false;
+            return stripos($item->vendor_name, request($this->filterName())) !== false;
         });
     }
 }

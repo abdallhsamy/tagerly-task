@@ -33,3 +33,13 @@ Now if you go to `http://localhost:3000/products/1`, you'll get
     "currency": "CZK"
 }
 ```
+
+
+## usage
+ make sure that you are running json server to retrieve data :
+ using postman or any web browser you can call any of the following examples   as `http://tagerlytask.test` is your app url fell free to use `localhost` or anything else
+ -  `http://tagerlytask.test/api/v1/products?price=10`
+ -  `http://tagerlytask.test/api/v1/products?price=10:20`
+ -  `http://tagerlytask.test/api/v1/products?vendor_name=Emie`
+ -  `http://tagerlytask.test/api/v1/products?name=Alysa%20Jacobs`
+

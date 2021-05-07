@@ -6,6 +6,7 @@ use App\Http\Resources\Product\ProductCollection;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,15 @@ class ProductController extends Controller
      */
     public function index(ProductService $apiService)
     {
-        $products = $apiService->all();
+//        $products = $apiService->all();
+        $products = app(Pipeline::class)
+            ->send($apiService->all())
+            ->through([
+                \App\QueryFilters\Name::class,
+                \App\QueryFilters\Price::class,
+                \App\QueryFilters\VendorName::class,
+            ])
+            ->thenReturn();
         return new ProductCollection($products);
     }
 
