@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Product\ProductCollection;
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,10 +14,9 @@ class ProductController extends Controller
      *
      * @return \App\Http\Resources\Product\ProductCollection
      */
-    public function index()
+    public function index(ProductService $apiService)
     {
-        $products = Product::with('vendor', 'votes')->get();
-
+        $products = $apiService->all();
         return new ProductCollection($products);
     }
 

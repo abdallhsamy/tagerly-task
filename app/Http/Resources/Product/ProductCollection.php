@@ -11,12 +11,13 @@ class ProductCollection extends ResourceCollection
     public function toArray($request)
     {
         return $this->collection->transform(fn($item) => [
+            'id' => $item->id,
             'name' => $item->name,
-            'price' => $item->price,
-            'vendor_id' => $item->vendor_id,
+            'price' => (float) $item->price,
+//            'vendor_id' => $item->vendor_id,
             'sold_times' => $item->sold_times,
             'currency' => $item->currency,
-            'vendor_name' => $item->vendor->name,
+            'vendor_name' => $item->vendor_name,
             'votes' => new VoteCollection($item->votes),
         ]);
     }
