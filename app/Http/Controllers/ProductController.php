@@ -26,6 +26,20 @@ class ProductController extends Controller
                 \App\QueryFilters\VendorName::class,
             ])
             ->thenReturn();
+
+        if (request()->has('sort') && in_array(request()->sort, ['price', 'most_selling', 'votes'])) {
+                if(request()->sort === 'price' ) {
+
+                    $products = $products->sortBy(function($product)
+                    {
+                        return $product->price;
+                    });
+                    if(request()->has('type') && request()->type === 'desc') {
+                        $products = $products->reverse();
+                    }
+                }
+        }
+
         return new ProductCollection($products);
     }
 

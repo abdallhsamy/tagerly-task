@@ -42,4 +42,7 @@ Now if you go to `http://localhost:3000/products/1`, you'll get
  -  `http://tagerlytask.test/api/v1/products?price=10:20`
  -  `http://tagerlytask.test/api/v1/products?vendor_name=Emie`
  -  `http://tagerlytask.test/api/v1/products?name=Alysa%20Jacobs`
+ -  `http://tagerlytask.test/api/v1/products?sort=price`
+ -  `http://tagerlytask.test/api/v1/products?sort=price`
+ -  `http://tagerlytask.test/api/v1/products?sort=price&type=desc`
 
