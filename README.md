@@ -6,3 +6,30 @@
 </p>
 
 ## About
+
+## how to run fake API server
+
+### Install JSON Server
+
+```bash
+npm install -g json-server
+```
+
+### Start fake API server
+
+```bash
+json-server --watch db.json
+```
+
+Now if you go to `http://localhost:3000/products/1`, you'll get
+
+```json
+{
+    "id": 1,
+    "name": "Alysa Jacobs",
+    "price": "13",
+    "vendor_id": "1",
+    "sold_times": "51",
+    "currency": "CZK"
+}
+```
