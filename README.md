@@ -45,4 +45,6 @@ Now if you go to `http://localhost:3000/products/1`, you'll get
  -  `http://tagerlytask.test/api/v1/products?sort=price`
  -  `http://tagerlytask.test/api/v1/products?sort=price`
  -  `http://tagerlytask.test/api/v1/products?sort=price&type=desc`
+ -  `http://tagerlytask.test/api/v1/products?sort=most_selling`
+ -  `http://tagerlytask.test/api/v1/products?sort=votes`
 

@@ -34,9 +34,22 @@ class ProductController extends Controller
                     {
                         return $product->price;
                     });
+
                     if(request()->has('type') && request()->type === 'desc') {
                         $products = $products->reverse();
                     }
+                } else if(request()->sort === 'most_selling') {
+                    $products = $products->sortBy(function($product)
+                    {
+                        return $product->sold_times;
+                    });
+                    $products = $products->reverse();
+                } else if(request()->sort === 'votes') {
+                    $products = $products->sortBy(function($product)
+                    {
+                        return count($product->votes);
+                    });
+                    $products = $products->reverse();
                 }
         }
 
