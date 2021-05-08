@@ -49,11 +49,7 @@ cp .env.example .env
 ```
 5. open `.env` file and file with your database credentials and database name.
 6. run `composer install` command to download packages which are needed to run the app.
-7. run database migrations :
-```bash
-php artisan migrate:fresh --seed
-```
-8. run `php artisan serve` command to run app or use `valet`.
+7. run `php artisan serve` command to run app or use `valet`.
 
 - feel free to use `docker`.
 ## requirements
